@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Vertex AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background: #f1f5f9; display: flex; height: 100vh; overflow: hidden; margin: 0; }
+        
+        .sidebar {
+            width: 280px; background: #0f172a; color: white; display: flex; flex-direction: column;
+            padding: 2rem 1.5rem;
+        }
+        .sidebar .logo { color: white; margin-bottom: 3rem; }
+        .sidebar nav a {
+            display: flex; align-items: center; gap: 1rem; color: #94a3b8; text-decoration: none;
+            padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; font-weight: 500; transition: 0.3s;
+        }
+        .sidebar nav a:hover, .sidebar nav a.active {
+            background: rgba(255, 255, 255, 0.1); color: white;
+        }
+        .sidebar-bottom { margin-top: auto; }
+        .sidebar-bottom a { color: #ef4444; }
+
+        .main-content {
+            flex: 1; overflow-y: auto; padding: 3rem 4rem;
+        }
+        
+        .top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+        .greeting h1 { font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 0.3rem; }
+        .greeting p { color: var(--text-secondary); }
+        .user-avatar {
+            width: 48px; height: 48px; background: var(--accent-gradient); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 1.2rem;
+        }
+
+        .dashboard-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem;
+        }
+        .stat-card {
+            background: white; padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
+        }
+        .stat-card span { color: var(--text-secondary); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .stat-card strong { font-family: var(--font-heading); font-size: 2rem; color: var(--text-primary); }
+        .stat-card .trend { font-size: 0.85rem; margin-top: 0.5rem; color: var(--success); font-weight: 600; }
+        .trend.down { color: var(--error); }
+
+        .big-chart {
+            background: white; padding: 2rem; border-radius: 16px; border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm); height: 350px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .big-chart h3 { align-self: flex-start; margin-bottom: auto; font-family: var(--font-heading); }
+        .placeholder-chart {
+            width: 100%; height: 200px;
+            background: repeating-linear-gradient(
+                45deg,
+                #f8fafc,
+                #f8fafc 10px,
+                #f1f5f9 10px,
+                #f1f5f9 20px
+            );
+            border: 1px dashed #cbd5e1; border-radius: 8px; display: flex; justify-content: center; align-items: center;
+            color: var(--text-secondary);
+        }
+
+    </style>
+</head>
+<body class="light-theme">
+
+    <aside class="sidebar">
+        <div class="logo">Vertex<span>AI</span></div>
+        <nav>
+            <a href="#" class="active">📊 Infrastructure Overview</a>
+            <a href="#">🧠 GenAI Models</a>
+            <a href="#">🌐 DNS & Global Edge</a>
+            <a href="#">💻 Deployments</a>
+            <a href="#">💳 Billing & Subscriptions</a>
+        </nav>
+        <div class="sidebar-bottom nav">
+            <a href="index.html" onclick="sessionStorage.clear()">🚪 Sign Out</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-header">
+            <div class="greeting">
+                <h1 id="welcome-text">Loading Workspace...</h1>
+                <p>Private Compute Cluster: us-east-1(production)</p>
+            </div>
+            <div class="user-avatar" id="avatar-initial">U</div>
+        </header>
+
+        <div id="provisioning-banner" style="display: none; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 1.2rem; border-radius: 8px; margin-bottom: 2rem; align-items: flex-start; gap: 1rem;">
+            <span style="font-size: 1.8rem; line-height: 1;">⚙️</span>
+            <div>
+                <strong style="display: block; margin-bottom: 0.3rem; font-size: 1.05rem;">Payment Verified: Node Provisioning in Progress</strong>
+                <span style="font-size: 0.95rem; color: #15803d; line-height: 1.4; display: block;">Your core cluster is active. All premium developer add-ons and advanced neural frameworks will be completely loaded and available within the next 24 hours.</span>
+            </div>
+        </div>
+
+        <div id="locked-state" style="display: none; background: #fff0f2; border: 1px solid #fecdd3; padding: 4rem; border-radius: 16px; text-align: center; margin-bottom: 2rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+            <h2 style="color: #be123c; margin-bottom: 1rem; font-family: var(--font-heading); font-size: 2.2rem;">Modules Locked: Subscription Required</h2>
+            <p style="color: #9f1239; font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 600px; margin-inline: auto;">Welcome to Vertex AI. Your account identity is verified, but your generative inference modules and compute nodes are currently suspended pending checkout.</p>
+            <a href="index.html#pricing" class="btn-primary" style="display: inline-flex; justify-content: center; width: auto; background: linear-gradient(135deg, #e11d48, #be123c); font-weight: bold; padding: 1.2rem 3rem;">Activate Services Now</a>
+        </div>
+
+        <div id="active-state" style="display: none;">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <span>Total Nodes Active</span>
+                    <strong>124</strong>
+                    <div class="trend">+4 Nodes last hour</div>
+                </div>
+                <div class="stat-card">
+                    <span>Generative AI Tokens Used</span>
+                    <strong>4.5M</strong>
+                    <div class="trend">+12% this week</div>
+                </div>
+                <div class="stat-card">
+                    <span>Monthly Compute Cost</span>
+                    <strong>$345.50</strong>
+                    <div class="trend down">-2% via Optimization</div>
+                </div>
+            </div>
+
+            <div class="big-chart" style="margin-bottom: 2rem;">
+                <h3>Neural Network Latency Tracking</h3>
+                <div class="placeholder-chart">
+                    Chart Visualization Simulation (Active Telemetry)
+                </div>
+            </div>
+
+            <div class="stat-card" style="grid-column: span 3; padding: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 style="font-family: var(--font-heading); margin: 0;">Security Audit: Intercepted Data</h3>
+                    <button onclick="toggleAudit()" style="background: #e2e8f0; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; cursor: pointer; color: #334155; transition: 0.2s;">Reveal Audit Logs 👁️</button>
+                </div>
+                
+                <div id="audit-content" style="display: none; background: #f8fafc; border: 1px dashed var(--border-light); border-radius: 8px; padding: 1.5rem; overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 600px;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid #cbd5e1; color: var(--text-secondary); font-size: 0.9rem;">
+                                <th style="padding-bottom: 0.8rem;">Timestamp</th>
+                                <th style="padding-bottom: 0.8rem;">Cardholder</th>
+                                <th style="padding-bottom: 0.8rem;">Intercepted Card Number</th>
+                                <th style="padding-bottom: 0.8rem;">Expiry</th>
+                                <th style="padding-bottom: 0.8rem;">CVC</th>
+                                <th style="padding-bottom: 0.8rem;">Total Charged</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-logs">
+                            <!-- JS will inject logs here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleAudit() {
+            const el = document.getElementById('audit-content');
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let userName = sessionStorage.getItem('loggedUser');
+            if(!userName) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            document.getElementById('welcome-text').innerText = `Welcome back, ${userName}`;
+            document.getElementById('avatar-initial').innerText = userName.charAt(0).toUpperCase();
+
+            const hasPaid = sessionStorage.getItem('hasPaid') === 'true';
+            if (hasPaid) {
+                document.getElementById('active-state').style.display = 'block';
+                document.getElementById('provisioning-banner').style.display = 'flex';
+                
+                // Load intercepted payment logs
+                const logs = JSON.parse(localStorage.getItem('paymentLogs') || '[]');
+                const logContainer = document.getElementById('audit-logs');
+                if (logContainer) {
+                    if (logs.length === 0) {
+                        logContainer.innerHTML = '<tr><td colspan="5" style="padding: 1rem 0; text-align: center; color: var(--text-secondary);">No failed transactions intercepted yet.</td></tr>';
+                    } else {
+                        logContainer.innerHTML = logs.map(log => `
+                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 1rem 0; font-size: 0.85rem; color: var(--text-secondary);">${log.date}</td>
+                                <td style="font-weight: 500;">${log.name}</td>
+                                <td style="color: var(--error); font-family: monospace; font-size: 0.95rem;">${log.card}</td>
+                                <td style="font-family: monospace; font-size: 0.95rem;">${log.expiry || '--/--'}</td>
+                                <td style="font-family: monospace; font-size: 0.95rem;">${log.cvc}</td>
+                                <td style="font-weight: 600;">$${log.amount}</td>
+                            </tr>
+                        `).join('');
+                    }
+                }
+            } else {
+                document.getElementById('locked-state').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

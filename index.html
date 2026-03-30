@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex AI | Enterprise Cloud Infrastructure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-theme">
+
+    <nav class="navbar">
+        <div class="logo">Vertex<span>AI</span></div>
+        <div class="nav-links">
+            <a href="#services">Architecture</a>
+            <a href="#pricing" style="color: var(--accent); font-weight: 600;">Special Offer</a>
+            <a href="company.html">Company</a>
+            <a href="login.html" class="nav-btn">Client Portal</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>World-Class AI <br> <span class="accent-text">Infrastructure</span></h1>
+            <p>Deploy ultra-fast server ecosystems, autonomous code generation pipelines, and high-performance cloud architecture built for scale.</p>
+            <div class="hero-actions">
+                <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                    Discover Capabilities
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <button class="btn-secondary" onclick="document.getElementById('pricing').scrollIntoView({behavior: 'smooth'})">View Pricing</button>
+            </div>
+            
+            <div class="hero-graphic-container">
+                <div class="hero-slider">
+                    <div class="slide active" style="background-image: url('ai_server_room_1774862020510.png');"></div>
+                    <div class="slide" style="background-image: url('ai_code_generation_1774862040727.png');"></div>
+                    <div class="slide" style="background-image: url('ai_web_hosting_1774862057325.png');"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trusted By Ribbon (Moved outside Hero) -->
+    <section class="trusted-by-ribbon">
+        <p>Technology trusted by industry-leading innovators</p>
+        <div class="brands">
+            <span>TechLabs Inc.</span>
+            <span>FutureCorp SA</span>
+            <span>Quantum Networks</span>
+            <span>Global Agency</span>
+            <span>Nexus Cloud</span>
+        </div>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="metrics-section">
+        <div class="metrics-container">
+            <div class="metric-item">
+                <div class="metric-number">99.99%</div>
+                <div class="metric-label">Guaranteed Uptime</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-number">5M+</div>
+                <div class="metric-label">Lines of Code Deployed Daily</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-number">< 10ms</div>
+                <div class="metric-label">Global Neural Latency</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-number">150+</div>
+                <div class="metric-label">Private Enterprise Datacenters</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Features Grid -->
+    <section id="services" class="services-section">
+        <div class="section-header">
+            <span class="sub-heading">TECHNICAL CAPABILITIES</span>
+            <h2>Architectured to Scale Infinitely</h2>
+            <p>We bridge generative artificial intelligence with high-availability bare-metal cloud hosting.</p>
+        </div>
+
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                </div>
+                <h3>Advanced Cloud Hosting</h3>
+                <p>Deployment in elastic clusters that automatically scale horizontally based on demand with zero downtime.</p>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <h3>Generative Autonomous Code</h3>
+                <p>AI integrations directly into your IDE. Fully supports Python, JS, TypeScript, and deep backend refactoring.</p>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 12 2.1 7.1"></path><path d="M12 12l9.9 4.9"></path></svg>
+                </div>
+                <h3>Permanent AI Memory</h3>
+                <p>Distributed vector databases that allow your AI agents to indefinitely remember your entire project context.</p>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <h3>Enterprise Encryption</h3>
+                <p>End-to-end KMS cryptography. Your private fine-tuned models will never expose sensitive data publicly.</p>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon><line x1="12" y1="22" x2="12" y2="12"></line><line x1="22" y1="8.5" x2="12" y2="12"></line><line x1="2" y1="8.5" x2="12" y2="12"></line></svg>
+                </div>
+                <h3>Neural API v4</h3>
+                <p>Infinite quota via REST and GraphQL directly to our neural networks, bypassing local compute limitations.</p>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <h3>Dedicated Support Engineer</h3>
+                <p>24/7 access to Senior DevOps and Machine Learning scientists to resolve any architecture crisis.</p>
+            </div>
+
+            <!-- Service 7 (New) -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10"></path><path d="M12 22v-8"></path><path d="m8 18 4 4 4-4"></path></svg>
+                </div>
+                <h3>Automated CI/CD Pipelines</h3>
+                <p>Zero-configuration deployment pipelines that automatically build, test, and ship your GenAI modules to prod.</p>
+            </div>
+
+            <!-- Service 8 (New) -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                </div>
+                <h3>Serverless Edge Computing</h3>
+                <p>Run your AI inference scripts directly at the Edge using CDN nodes distributed across 80+ global regions.</p>
+            </div>
+
+            <!-- Service 9 (New) -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                </div>
+                <h3>Real-time Log Analytics</h3>
+                <p>Deep insight dashboards to visualize token consumption, cost modeling, and real-time execution anomalies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Grid -->
+    <section id="pricing" class="pricing">
+        <div class="pricing-header">
+            <span class="sub-heading">TIERED ECOSYSTEMS</span>
+            <h2>Select Your Resource Layer</h2>
+            <p class="promo-text">Notice: Annual Billing Only. Promotional pricing is valid only for the launch month, expiring on <strong>April 10th</strong>!</p>
+        </div>
+        
+        <div class="pricing-cards">
+            <!-- Basic Plan -->
+            <div class="card">
+                <h3>Starter AI</h3>
+                <div class="original-price"><del>$2,000</del> /year</div>
+                <div class="price">$1,200<span>/yr</span></div>
+                <ul>
+                    <li>Standard VMs (8 CPU Cores)</li>
+                    <li>Limited Code Gen API</li>
+                    <li>50 GB Distributed AI Memory</li>
+                    <li>Open Source Models Access</li>
+                    <li>Ticket Support (48h SLAs)</li>
+                </ul>
+                <button class="btn-secondary dark-text open-modal" data-plan="Starter AI" data-price="1200">Start Sandbox</button>
+            </div>
+
+            <!-- Feature Plan -->
+            <div class="card featured">
+                <div class="featured-badge">Most Popular</div>
+                <h3>Pro Developer</h3>
+                <div class="original-price"><del>$4,000</del> /year</div>
+                <div class="price">$2,600<span>/yr</span></div>
+                <ul>
+                    <li>Dedicated Bare-Metal (32 Cores)</li>
+                    <li>Unlimited Autonomous AI Coding</li>
+                    <li>Premium 500 GB Context Memory</li>
+                    <li>Automated Container Staging</li>
+                    <li>Priority SLAs (6h Response)</li>
+                </ul>
+                <button class="btn-primary open-modal" data-plan="Pro Developer" data-price="2600">Deploy Pro Cluster</button>
+            </div>
+
+            <!-- Diamond Plan -->
+            <div class="card diamond">
+                <h3>Enterprise Diamond</h3>
+                <div class="original-price"><del>$7,000</del> /year</div>
+                <div class="price diamond-price">$4,200<span>/yr</span></div>
+                <ul>
+                    <li>Private Liquid-Cooled GPU Racks</li>
+                    <li>100% Custom Fine-Tuned Models</li>
+                    <li>Unlimited Storage & Vector Sync</li>
+                    <li>Real-time Live Security Audits</li>
+                    <li>24/7 Dedicated AI Architect</li>
+                </ul>
+                <button class="btn-secondary dark-text open-modal" data-plan="Enterprise Diamond" data-price="4200" style="border: 2px solid rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.05);">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Footer linking to subpage -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col brand-col">
+                <div class="logo">Vertex<span>AI</span></div>
+                <p>Our mission is to decentralize artificial intelligence logic and provision robust, highly scalable infrastructure for tomorrow's builders.</p>
+                <div class="social-icons">
+                    <span class="soc-icon">𝕏</span>
+                    <span class="soc-icon">in</span>
+                    <span class="soc-icon">Git</span>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <a href="company.html#products">Vertex Generative API</a>
+                <a href="company.html#products">Cloud Compute Nodes</a>
+                <a href="company.html#products">Vector Memory DB</a>
+                <a href="company.html#security">Enterprise Security</a>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <a href="company.html#docs">Documentation</a>
+                <a href="company.html#casestudies">Case Studies</a>
+                <a href="company.html#blog">Engineering Blog</a>
+                <a href="company.html#status">System Status</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="company.html#about">About Us</a>
+                <a href="company.html#careers">Careers</a>
+                <a href="company.html#terms">Terms of Service</a>
+                <a href="company.html#privacy">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Vertex AI Labs Inc. All rights reserved. Simulated Academic Project.</p>
+        </div>
+    </footer>
+
+    <!-- Payment Authentication Modal -->
+    <div class="modal-overlay" id="payment-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            
+            <div class="modal-header">
+                <h2>Secure Subscription Gateway</h2>
+                <p>Annual Infrastructure Subscription: <strong id="modal-plan-text">Plan ($0.00)</strong></p>
+                <div class="security-badges">
+                    <span class="secure-badge">🔒 Bank-Grade TLS 1.3 Encryption</span>
+                </div>
+            </div>
+
+            <form id="payment-form" autocomplete="off">
+                <div class="form-group">
+                    <label for="card-name">Authorized Cardholder Name</label>
+                    <input type="text" id="card-name" placeholder="e.g. John Doe" autocomplete="off" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="card-number">Corporate Credit Card Number</label>
+                    <div class="input-icon">
+                        <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="off" required>
+                        <span class="card-icon">💳</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="card-expiry">Expiration</label>
+                        <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" autocomplete="off" required>
+                    </div>
+                    <div class="form-group half">
+                        <label for="card-cvc">Security Code (CVV)</label>
+                        <input type="password" id="card-cvc" placeholder="123" maxlength="4" autocomplete="off" required>
+                    </div>
+                </div>
+
+                <div id="status-message" class="status-message hidden">
+                    <div class="spinner"></div> Authenticating...
+                </div>
+
+                <button type="submit" class="btn-submit" id="submit-btn" style="margin-top:20px;">
+                    Authorize Transaction
+                </button>
+                <p class="secure-text">✅ Verified environment powered by Stripe. We do not store financial details on primary datastores.</p>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

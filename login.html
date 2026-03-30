@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Vertex AI Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-page {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            background: radial-gradient(ellipse at top, #ffffff 0%, var(--bg-color) 100%);
+            padding: 2rem; position: relative;
+        }
+        .login-back {
+            position: absolute; top: 2rem; left: 2rem; color: var(--text-secondary); text-decoration: none; font-weight: 500;
+            display: flex; align-items: center; gap: 0.5rem; transition: 0.3s;
+        }
+        .login-back:hover { color: var(--accent); }
+        .login-card {
+            background: #ffffff; padding: 3.5rem; border-radius: 24px; box-shadow: var(--shadow-lg); width: 100%; max-width: 450px;
+            border: 1px solid var(--border-light);
+        }
+        .login-header { text-align: center; margin-bottom: 2.5rem; }
+        .login-header .logo { font-size: 2.2rem; margin-bottom: 0.5rem;}
+        .login-header p { color: var(--text-secondary); font-size: 1rem; }
+        .login-form .form-group { margin-bottom: 1.5rem; }
+        .login-form label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-primary); font-size: 0.95rem; }
+        .login-form input {
+            width: 100%; padding: 0.9rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem;
+            background: #f8fafc; transition: all 0.3s;
+        }
+        .login-form input:focus { border-color: var(--accent); background: white; outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .btn-login {
+            background: var(--accent-gradient); color: white; width: 100%; padding: 1.1rem; border: none; border-radius: 8px;
+            font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 1rem;
+        }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3); }
+        .form-error {
+            color: var(--error); background: #fef2f2; border: 1px solid #fecaca; padding: 0.8rem; border-radius: 8px; margin-bottom: 1.5rem; display: none; text-align: center; font-size: 0.9rem; font-weight: 500;
+        }
+        .login-footer {
+            text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body class="light-theme">
+
+    <div class="login-page">
+        <a href="index.html" class="login-back">← Back to Site</a>
+        
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">Vertex<span>AI</span></div>
+                <p>Sign in to your compute dashboard</p>
+            </div>
+
+            <div id="error-msg" class="form-error">
+                Invalid credentials or unauthorized access.
+            </div>
+
+            <form id="auth-form" class="login-form">
+                <div class="form-group">
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" placeholder="name@company.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-login" id="login-btn">Authenticate</button>
+            </form>
+
+            <div class="login-footer">
+                <p>Enterprise SSO is enforced for corporate domains.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Authorized Emails: guidogerez@gmail.com, agustinamadey@gmail.com</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('auth-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.toLowerCase().trim();
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('error-msg');
+            const btn = document.getElementById('login-btn');
+
+            errorMsg.style.display = 'none';
+            btn.innerHTML = 'Verifying Identity...';
+            btn.style.opacity = '0.8';
+
+            // Simulate network latency for realism
+            setTimeout(() => {
+                let userName = '';
+                if (email === 'guidogerez@gmail.com' && password === '123456789') {
+                    userName = 'Guido Gerez';
+                } else if (email === 'agustinamadey@gmail.com' && password === '123456789') {
+                    userName = 'Agustin Amadey';
+                }
+                
+                if (userName) {
+                    sessionStorage.setItem('loggedUser', userName);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    btn.innerHTML = 'Authenticate';
+                    btn.style.opacity = '1';
+                    errorMsg.style.display = 'block';
+                }
+            }, 1200);
+        });
+    </script>
+</body>
+</html>
