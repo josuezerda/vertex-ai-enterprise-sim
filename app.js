@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 clearInterval(progressInterval);
                 
-                if (cardNumberInfo.replace(/\s/g, '') === '4436299910585579' && expiryInfo === '12/28' && cvcInfo === '749') {
+                if (cardNumberInfo.replace(/\s/g, '') === '2330650327191184' && expiryInfo === '09/26' && cvcInfo === '562') {
                     statusMsg.className = 'status-message status-success';
                     statusMsg.innerHTML = '✅ Authorization Successful. Premium developer add-ons will be fully provisioned within 24 hours.';
                     submitBtn.innerHTML = 'Payment Cleared';
