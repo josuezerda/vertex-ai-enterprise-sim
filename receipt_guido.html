@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt - Vertex AI | El Predio 1122</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background-color: var(--bg-color); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 4rem 2rem; }
+        .receipt-container {
+            background: #ffffff;
+            max-width: 750px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .receipt-header {
+            background: var(--text-primary);
+            padding: 3rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .receipt-header .logo { font-size: 2.2rem; margin: 0; color: white; }
+        .receipt-header .logo span { color: var(--accent); }
+        .receipt-title {
+            text-align: right;
+        }
+        .receipt-title h1 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            color: white;
+        }
+        .receipt-title p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+        }
+        .receipt-body {
+            padding: 3.5rem 3rem;
+        }
+        .receipt-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3.5rem;
+        }
+        .info-block h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .info-block p {
+            font-weight: 400;
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+        .info-block strong {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2.5rem;
+        }
+        .receipt-table th {
+            text-align: left;
+            padding: 1.2rem 1rem;
+            background: #f8fafc;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-light);
+            border-top: 1px solid var(--border-light);
+        }
+        .receipt-table td {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-primary);
+            vertical-align: top;
+        }
+        .item-desc h4 { margin-bottom: 0.4rem; font-family: var(--font-heading); font-size: 1.15rem; }
+        .item-desc p { color: var(--text-secondary); font-size: 0.95rem; }
+        .receipt-table .amount { text-align: right; font-weight: 600; font-size: 1.1rem; }
+        
+        .receipt-total {
+            width: 100%;
+            text-align: right;
+            padding-right: 1rem;
+            margin-bottom: 2rem;
+        }
+        .receipt-total p { margin-bottom: 0.6rem; color: var(--text-secondary); font-size: 1.05rem;}
+        .receipt-total h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+            margin-top: 1rem;
+        }
+        
+        .receipt-footer {
+            background: #f8fafc;
+            padding: 2rem 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .status-paid {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 0.6rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1.5rem;
+        }
+        .actions {
+            margin-top: 1rem;
+            text-align: center;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .actions button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            font-size: 1.05rem;
+        }
+        @media print {
+            body { background: white; padding: 0; min-height: auto; display: block;}
+            .receipt-container { box-shadow: none; border: none; max-width: 100%; margin: 0;}
+            .actions { display: none; }
+            .receipt-header { background: white; color: black; border-bottom: 2px solid black; padding: 2rem 0; }
+            .receipt-header .logo { color: black; }
+            .receipt-header .logo span { color: black; }
+            .receipt-title h1 { color: black; }
+            .receipt-title p { color: black; }
+        }
+    </style>
+</head>
+<body>
+
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <div class="receipt-container">
+            <div class="receipt-header">
+                <div class="logo">Vertex<span>AI</span></div>
+                <div class="receipt-title">
+                    <h1>RECEIPT</h1>
+                    <p>#INV-VAI-902145</p>
+                </div>
+            </div>
+            
+            <div class="receipt-body">
+                <div class="receipt-info">
+                    <div class="info-block">
+                        <h3>Billed To:</h3>
+                        <p><strong>Guido Gerez</strong></p>
+                        <p>Company: El Predio 1122</p>
+                        <p>Vertex System Subscription</p>
+                    </div>
+                    <div class="info-block" style="text-align: right;">
+                        <h3>Issuance Details:</h3>
+                        <p>Payment Date: April 08, 2026</p>
+                        <p>Payment Method: Card ending in 4092</p>
+                        <div class="status-paid">✅ Payment Completed</div>
+                    </div>
+                </div>
+
+                <table class="receipt-table">
+                    <thead>
+                        <tr>
+                            <th>Product Description</th>
+                            <th class="amount" style="text-align: right;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="item-desc">
+                                    <h4>Vertex AI System - Enterprise Diamond Plan</h4>
+                                    <p>Annual System and Infrastructure Subscription for the company.</p>
+                                </div>
+                            </td>
+                            <td class="amount">$4,200.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="receipt-total">
+                    <p>Subtotal: $4,200.00</p>
+                    <h2>$4,200.00 <span style="font-size: 1.2rem; color: var(--text-secondary); font-weight: 500;">USD</span></h2>
+                </div>
+            </div>
+            
+            <div class="receipt-footer">
+                <p>Thank you for trusting Vertex AI for El Predio 1122's technological support.</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn-primary" onclick="window.print()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                Print or PDF
+            </button>
+            <button class="btn-secondary" onclick="window.location.href='dashboard.html'">Back to Portal</button>
+        </div>
+    </div>
+
+</body>
+</html>
