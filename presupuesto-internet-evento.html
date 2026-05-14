@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto - Servicio de Internet para Evento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --bg-subtle: #f8fafc;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: #f1f5f9;
+            line-height: 1.6;
+        }
+
+        .quote {
+            max-width: 850px;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* ═══ HEADER ═══ */
+        .quote-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #334155 100%);
+            color: white;
+            padding: 3rem 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .quote-header::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -15%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .quote-header::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+        .brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .brand span { color: var(--accent-light); }
+        .brand-sub {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
+        }
+
+        .quote-number {
+            text-align: right;
+        }
+        .quote-number .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #94a3b8;
+        }
+        .quote-number .number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-light);
+            margin-top: 0.2rem;
+        }
+
+        .header-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 2rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .header-info .info-item .info-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #64748b;
+            margin-bottom: 0.3rem;
+        }
+        .header-info .info-item .info-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* ═══ EVENT BANNER ═══ */
+        .event-banner {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #818cf8 100%);
+            padding: 2rem 3.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .event-icon {
+            font-size: 2.8rem;
+            background: rgba(255,255,255,0.15);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            flex-shrink: 0;
+        }
+        .event-details h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+        }
+        .event-details p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        .event-badge {
+            margin-left: auto;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* ═══ BODY ═══ */
+        .quote-body { padding: 3rem 3.5rem; }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        /* ═══ SERVICE TABLE ═══ */
+        .service-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2.5rem;
+        }
+        .service-table th {
+            text-align: left;
+            padding: 1rem 1.2rem;
+            background: var(--bg-subtle);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border);
+        }
+        .service-table th:last-child { text-align: right; }
+        .service-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        .service-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .service-table .item-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+        .service-table .item-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ═══ TOTAL ═══ */
+        .total-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 2.5rem;
+        }
+        .total-box {
+            min-width: 300px;
+        }
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .total-line.grand {
+            border-top: 2px solid var(--primary);
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+        }
+        .total-line.grand span:first-child {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+        .total-line.grand span:last-child {
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        /* ═══ FEATURES ═══ */
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 1rem 1.2rem;
+            background: var(--bg-subtle);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .feature-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+        .feature-text h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.15rem;
+        }
+        .feature-text p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* ═══ CONDITIONS ═══ */
+        .conditions {
+            background: var(--bg-subtle);
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+        .conditions h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+        .conditions ul {
+            list-style: none;
+            padding: 0;
+        }
+        .conditions li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 0.35rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .conditions li::before {
+            content: '•';
+            position: absolute;
+            left: 0.4rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* ═══ SIGNATURE ═══ */
+        .signature-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+        .sig-block {
+            text-align: center;
+        }
+        .sig-line {
+            border-top: 1px solid #cbd5e1;
+            margin-top: 4rem;
+            padding-top: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .sig-line strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        /* ═══ FOOTER ═══ */
+        .quote-footer {
+            background: var(--primary);
+            color: #94a3b8;
+            padding: 1.5rem 3.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .quote-footer strong { color: white; }
+
+        /* ═══ PRINT ═══ */
+        .print-btn {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem auto 2rem;
+        }
+        .print-btn button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .print-btn button:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(99,102,241,0.3);
+        }
+
+        @media print {
+            body { background: white; }
+            .quote { box-shadow: none; margin: 0; border-radius: 0; max-width: 100%; }
+            .no-print { display: none !important; }
+            .feature, .service-table td, .conditions { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quote">
+    <!-- HEADER -->
+    <div class="quote-header">
+        <div class="header-top">
+            <div>
+                <div class="brand">Presupuesto<span>.</span></div>
+                <div class="brand-sub">Servicio de Conectividad</div>
+            </div>
+            <div class="quote-number">
+                <div class="label">Presupuesto N°</div>
+                <div class="number">#0052</div>
+            </div>
+        </div>
+
+        <div class="header-divider"></div>
+
+        <div class="header-info">
+            <div class="info-item">
+                <div class="info-label">Fecha de emisión</div>
+                <div class="info-value">13 de Mayo, 2026</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Validez</div>
+                <div class="info-value">48 horas</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Método de pago</div>
+                <div class="info-value">Transferencia / Efectivo</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EVENT BANNER -->
+    <div class="event-banner">
+        <div class="event-icon">📡</div>
+        <div class="event-details">
+            <h2>Servicio de Internet para Evento</h2>
+            <p>Santa Lucía — Sábado 16 de Mayo, 2026 • 15:00 hs a 03:00 hs</p>
+        </div>
+        <div class="event-badge">12 Horas</div>
+    </div>
+
+    <!-- BODY -->
+    <div class="quote-body">
+        <p class="section-label">Detalle del servicio</p>
+
+        <table class="service-table">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="item-name">Internet de Alta Velocidad — 300 Mbps</div>
+                        <div class="item-desc">Enlace dedicado de 300 Megabits por segundo, simétrico. Conexión de alta potencia con respaldo 4G/5G para máxima estabilidad y cobertura total del predio del evento.</div>
+                    </td>
+                    <td>Incluido</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item-name">Datos ilimitados — Sin restricción de consumo</div>
+                        <div class="item-desc">Tráfico de datos ilimitado durante las 12 horas de operación. Sin throttling, sin límites de descarga/subida, ideal para streaming en vivo, transmisiones y uso masivo simultáneo.</div>
+                    </td>
+                    <td>Incluido</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item-name">Instalación de Antena de Alta Potencia</div>
+                        <div class="item-desc">Despliegue e instalación de antena direccional de alta ganancia para garantizar señal estable y cobertura amplia en todo el espacio del evento. Incluye cableado estructurado y configuración de red.</div>
+                    </td>
+                    <td>Incluido</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item-name">Operario Técnico en Sitio</div>
+                        <div class="item-desc">Técnico especializado presente durante todo el evento (15:00 a 03:00 hs) para monitoreo continuo, resolución inmediata de incidencias y soporte técnico en tiempo real.</div>
+                    </td>
+                    <td>Incluido</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item-name">Setup y Desmontaje Completo</div>
+                        <div class="item-desc">Montaje previo al evento y desmontaje posterior. Incluye pruebas de velocidad, test de cobertura y certificación de funcionamiento antes del inicio.</div>
+                    </td>
+                    <td>Incluido</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- TOTAL -->
+        <div class="total-section">
+            <div class="total-box">
+                <div class="total-line">
+                    <span>Servicio completo (12 hs)</span>
+                    <span>$390.000</span>
+                </div>
+                <div class="total-line">
+                    <span>Instalación y desmontaje</span>
+                    <span>Bonificado</span>
+                </div>
+                <div class="total-line">
+                    <span>Operario técnico</span>
+                    <span>Bonificado</span>
+                </div>
+                <div class="total-line grand">
+                    <span>TOTAL</span>
+                    <span>$390.000</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURES -->
+        <p class="section-label">¿Qué incluye?</p>
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">⚡</span>
+                <div class="feature-text">
+                    <h4>300 Mbps Dedicados</h4>
+                    <p>Velocidad simétrica real, sin compartir con otros usuarios</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">♾️</span>
+                <div class="feature-text">
+                    <h4>Datos Ilimitados</h4>
+                    <p>Sin tope de consumo ni reducción de velocidad</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📡</span>
+                <div class="feature-text">
+                    <h4>Antena de Alta Potencia</h4>
+                    <p>Cobertura total del predio con señal estable</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">👷</span>
+                <div class="feature-text">
+                    <h4>Operario Técnico</h4>
+                    <p>Soporte presencial durante todo el evento</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔧</span>
+                <div class="feature-text">
+                    <h4>Setup Profesional</h4>
+                    <p>Montaje, pruebas y certificación incluidos</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🛡️</span>
+                <div class="feature-text">
+                    <h4>Respaldo de Conexión</h4>
+                    <p>Enlace secundario de emergencia por si cae la línea principal</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONDITIONS -->
+        <div class="conditions">
+            <h3>Condiciones</h3>
+            <ul>
+                <li>El presupuesto tiene una validez de 48 horas desde la fecha de emisión.</li>
+                <li>Se requiere seña del 50% ($195.000) para confirmar la reserva del servicio.</li>
+                <li>El saldo restante se abona antes o durante el evento.</li>
+                <li>El servicio cubre desde las 15:00 hs del sábado hasta las 03:00 hs del domingo.</li>
+                <li>Horas adicionales se cotizan aparte según disponibilidad.</li>
+            </ul>
+        </div>
+
+        <!-- SIGNATURE -->
+        <div class="signature-area">
+            <div class="sig-block">
+                <div class="sig-line">
+                    <strong>Proveedor</strong>
+                    Firma del prestador
+                </div>
+            </div>
+            <div class="sig-block">
+                <div class="sig-line">
+                    <strong>Cliente</strong>
+                    Firma de conformidad
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="quote-footer">
+        <p><strong>Servicio de Internet para Eventos</strong></p>
+        <p>Presupuesto generado el 13 de Mayo de 2026 • Santiago del Estero, Argentina</p>
+    </div>
+</div>
+
+<div class="print-btn no-print">
+    <button onclick="window.print()">📄 Imprimir / Guardar como PDF</button>
+</div>
+
+</body>
+</html>

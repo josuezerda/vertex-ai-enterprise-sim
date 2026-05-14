@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Servicios Tecnológicos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --bg-subtle: #f8fafc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: #f1f5f9;
+            line-height: 1.6;
+        }
+
+        .report {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* COVER */
+        .cover {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: white;
+            padding: 4rem 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .cover-logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            margin-bottom: 2rem;
+        }
+        .cover h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .cover h1 span { color: var(--accent-light); }
+        .cover-subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 550px;
+            margin-bottom: 2.5rem;
+        }
+        .cover-meta {
+            display: flex;
+            gap: 3rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        .cover-meta strong { display: block; color: white; font-size: 1rem; margin-top: 0.2rem; }
+
+        /* SECTIONS */
+        .content { padding: 3rem 3.5rem; }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 2.5rem 0 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title:first-child { margin-top: 0; }
+
+        .intro {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+
+        /* CATEGORY */
+        .category {
+            margin-bottom: 2.5rem;
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .cat-cloud { background: #ede9fe; color: #5b21b6; }
+        .cat-ai { background: #dbeafe; color: #1d4ed8; }
+        .cat-hosting { background: #fef3c7; color: #92400e; }
+        .cat-design { background: #fce7f3; color: #9d174d; }
+        .cat-marketing { background: #d1fae5; color: #065f46; }
+        .cat-tools { background: #e0e7ff; color: #3730a3; }
+        .cat-subs { background: #f1f5f9; color: #475569; }
+        .cat-icon { font-size: 1.3rem; }
+
+        /* SERVICE CARD */
+        .service {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 0.8rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: start;
+            transition: box-shadow 0.2s;
+        }
+        .service:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .service-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        .service-desc {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+        .service-charges {
+            text-align: right;
+            white-space: nowrap;
+        }
+        .service-charges .amount {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--primary);
+        }
+        .service-charges .detail {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+        }
+
+        /* SUMMARY TABLE */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .summary-table th {
+            background: var(--bg-subtle);
+            padding: 0.8rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+        }
+        .summary-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .summary-table .total-row td {
+            font-weight: 700;
+            font-size: 1rem;
+            background: var(--bg-subtle);
+            border-top: 2px solid var(--primary);
+        }
+        .text-right { text-align: right; }
+
+        /* FOOTER */
+        .report-footer {
+            background: var(--bg-subtle);
+            padding: 2rem 3.5rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; }
+            .report { box-shadow: none; margin: 0; border-radius: 0; max-width: 100%; }
+            .cover { padding: 3rem 2.5rem; }
+            .content { padding: 2rem 2.5rem; }
+            .service:hover { box-shadow: none; }
+            .no-print { display: none; }
+            .category { break-inside: avoid; }
+            .service { break-inside: avoid; }
+        }
+
+        .print-btn {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem auto 2rem;
+        }
+        .print-btn button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+        .print-btn button:hover { background: #4f46e5; }
+
+        .justification {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: #166534;
+        }
+    </style>
+</head>
+<body>
+
+<div class="report">
+    <!-- PORTADA -->
+    <div class="cover">
+        <div class="cover-logo">⚡ Servicios Digitales</div>
+        <h1>Informe de <span>Servicios Tecnológicos</span></h1>
+        <p class="cover-subtitle">Detalle y justificación de los servicios digitales contratados para la operación tecnológica de la empresa. Período: Marzo–Abril 2026.</p>
+        <div class="cover-meta">
+            <div>Elaborado por<strong>Equipo de Tecnología</strong></div>
+            <div>Fecha<strong>13 de Mayo, 2026</strong></div>
+            <div>Período<strong>Marzo – Abril 2026</strong></div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2 class="section-title">Resumen Ejecutivo</h2>
+        <p class="intro">
+            El presente informe detalla los servicios tecnológicos que aparecen en el resumen de la tarjeta Mastercard Black del Banco Macro. Cada servicio cumple un rol específico dentro de la infraestructura digital, desarrollo de software, inteligencia artificial, diseño, marketing y operaciones de la empresa. A continuación se categoriza y explica cada uno.
+        </p>
+
+        <!-- ═══════ CLOUD & INFRAESTRUCTURA ═══════ -->
+        <div class="category">
+            <div class="category-header cat-cloud">
+                <span class="cat-icon">☁️</span> Infraestructura Cloud (Servidores y Nube)
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">Google Cloud Platform (GCP)</div>
+                    <div class="service-desc">Plataforma de computación en la nube de Google. Se utiliza para alojar servidores, bases de datos, APIs, funciones serverless y procesamiento de datos. Es la columna vertebral de la infraestructura donde corren las aplicaciones y backends de los proyectos. Aparece como múltiples cargos porque cada proyecto tiene su propia cuenta de facturación.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">USD 865,73</div>
+                    <div class="detail">4 cargos: 100 + 65.73 + 200 + 500</div>
+                </div>
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">Railway.app</div>
+                    <div class="service-desc">Plataforma de hosting para aplicaciones backend y microservicios. Permite desplegar servidores Node.js, Python, bases de datos PostgreSQL y servicios auxiliares de forma rápida. Se usa para proyectos que necesitan despliegue ágil sin la complejidad de GCP.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">USD 34,99</div>
+                    <div class="detail">2 cargos: 25.19 + 9.80</div>
+                </div>
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">Vercel Inc.</div>
+                    <div class="service-desc">Plataforma de hosting especializada en aplicaciones frontend y sitios web con Next.js/React. Proporciona CDN global, certificados SSL automáticos y despliegue continuo. Se usa para servir las interfaces web (landings, dashboards y portales de clientes) con alta velocidad y disponibilidad.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">USD 40,00</div>
+                    <div class="detail">1 cargo</div>
+                </div>
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">Supabase</div>
+                    <div class="service-desc">Plataforma de base de datos PostgreSQL en la nube con autenticación integrada, almacenamiento de archivos y APIs en tiempo real. Se usa como backend-as-a-service para gestionar usuarios, datos y autenticación de las aplicaciones SaaS.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">SGD 25,00</div>
+                    <div class="detail">~USD 18.50</div>
+                </div>
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">HostGator (Web Hosting)</div>
+                    <div class="service-desc">Servicio de web hosting tradicional y registro de dominios. Se utiliza para alojar sitios web corporativos, correos electrónicos empresariales y dominios de los proyectos que requieren hosting compartido o VPS.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">USD 530,10</div>
+                    <div class="detail">2 cargos: 229.99 + 300.11</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════ INTELIGENCIA ARTIFICIAL ═══════ -->
+        <div class="category">
+            <div class="category-header cat-ai">
+                <span class="cat-icon">🤖</span> Inteligencia Artificial
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">OpenAI (API + ChatGPT)</div>
+                    <div class="service-desc">Servicio de inteligencia artificial de OpenAI. Incluye el uso de la API de GPT para integrar IA en productos (chatbots, asistentes virtuales, generación de contenido automatizado) y la suscripción a ChatGPT Plus/Team para uso interno del equipo en desarrollo, investigación y redacción.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">USD ~112,74</div>
+                    <div class="detail">5 cargos: 15.04 + 48.61 + 19.01€ + 15.01 + 15.07</div>
+                </div>
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">Google One / Google Workspace</div>
+                    <div class="service-desc">Suscripción a los servicios premium de Google que incluyen almacenamiento ampliado en la nube, Google Gemini AI (asistente IA de Google integrado), y herramientas de productividad empresarial (Gmail corporativo, Drive, Docs, Calendar). Esencial para la colaboración del equipo.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">USD 124,99</div>
+                    <div class="detail">1 cargo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════ ATENCIÓN AL CLIENTE ═══════ -->
+        <div class="category">
+            <div class="category-header cat-tools">
+                <span class="cat-icon">💬</span> Atención al Cliente y Comunicaciones
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">Chatwoot</div>
+                    <div class="service-desc">Plataforma de soporte y mensajería omnicanal. Centraliza las conversaciones con clientes desde WhatsApp, email, chat web e Instagram en un solo panel. Permite al equipo de soporte gestionar consultas, asignar tickets y mantener historial de interacciones con cada cliente.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">USD 19,00</div>
+                    <div class="detail">1 cargo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════ PUBLICIDAD ═══════ -->
+        <div class="category">
+            <div class="category-header cat-marketing">
+                <span class="cat-icon">📢</span> Publicidad y Marketing Digital
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">Facebook / Meta Ads</div>
+                    <div class="service-desc">Plataforma de publicidad digital de Meta (Facebook e Instagram). Se usa para campañas de adquisición de clientes, remarketing, promoción de productos/servicios y generación de leads a través de anuncios segmentados en Facebook e Instagram.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">AUD 15,51</div>
+                    <div class="detail">~USD 10.69</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════ DISEÑO Y MULTIMEDIA ═══════ -->
+        <div class="category">
+            <div class="category-header cat-design">
+                <span class="cat-icon">🎨</span> Diseño, Multimedia y Contenido
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">Adobe Creative Cloud</div>
+                    <div class="service-desc">Suite completa de herramientas profesionales de diseño: Photoshop (edición de imágenes), Illustrator (diseño vectorial), Premiere Pro (edición de video), After Effects (motion graphics), InDesign (diseño editorial). Esencial para crear material gráfico, videos promocionales, branding y contenido visual para todas las plataformas.</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">ARS ~136.804</div>
+                    <div class="detail">4 cargos Adobe</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════ SUSCRIPCIONES APPLE ═══════ -->
+        <div class="category">
+            <div class="category-header cat-subs">
+                <span class="cat-icon">🍎</span> Suscripciones Apple (App Store)
+            </div>
+
+            <div class="service">
+                <div>
+                    <div class="service-name">Apple.com/bill (Múltiples)</div>
+                    <div class="service-desc">Cargos agrupados del ecosistema Apple que incluyen: iCloud+ (almacenamiento en la nube para backups y archivos), Apple Developer Program (licencia para publicar apps en App Store), y suscripciones a aplicaciones profesionales adquiridas a través de la App Store necesarias para el trabajo diario (herramientas de productividad, utilidades de desarrollo, etc).</div>
+                </div>
+                <div class="service-charges">
+                    <div class="amount">USD ~86,72</div>
+                    <div class="detail">9 cargos variados</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="report-footer">
+        <p><strong>Informe de Servicios Tecnológicos</strong></p>
+        <p>Documento generado el 13 de Mayo de 2026 • Período Marzo–Abril 2026</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Este informe es de uso interno y tiene como finalidad justificar los gastos operativos en tecnología.</p>
+    </div>
+</div>
+
+<div class="print-btn no-print">
+    <button onclick="window.print()">📄 Imprimir / Guardar como PDF</button>
+</div>
+
+</body>
+</html>
