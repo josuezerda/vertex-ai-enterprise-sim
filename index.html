@@ -168,6 +168,15 @@
                 <h3>Real-time Log Analytics</h3>
                 <p>Deep insight dashboards to visualize token consumption, cost modeling, and real-time execution anomalies.</p>
             </div>
+
+            <!-- Service 10 (New - Cognitive) -->
+            <div class="service-card" style="border: 1px solid rgba(168, 85, 247, 0.5); background: rgba(168, 85, 247, 0.05);">
+                <div class="service-icon" style="color: #a855f7;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </div>
+                <h3>Cognitive Vision & Behavior Hub</h3>
+                <p>Advanced human behavior analytics and neural camera processing connected directly to an intelligent central hub for predictive alerts.</p>
+            </div>
         </div>
     </section>
 
@@ -176,7 +185,9 @@
         <div class="pricing-header">
             <span class="sub-heading">TIERED ECOSYSTEMS</span>
             <h2>Select Your Resource Layer</h2>
-            <p class="promo-text">Notice: Annual Billing Only. Promotional pricing is valid only for the launch month, expiring on <strong>June 2nd, 2027</strong>!</p>
+            <p class="promo-text" id="promo-countdown" style="color: #ef4444; font-weight: 600; font-size: 1.1rem;">
+                ⚠️ Flash Sale Ends Today at 18:00: <span id="timer" style="font-variant-numeric: tabular-nums;">--:--:--</span>
+            </p>
         </div>
         
         <div class="pricing-cards">
@@ -214,8 +225,8 @@
             <!-- Diamond Plan -->
             <div class="card diamond">
                 <h3>Enterprise Diamond</h3>
-                <div class="original-price"><del>$12,000</del> /year</div>
-                <div class="price diamond-price">$8,400<span>/yr</span></div>
+                <div class="original-price" id="diamond-original"><del>$15,000</del> /year</div>
+                <div class="price diamond-price" id="diamond-price">$6,200<span>/yr</span></div>
                 <ul>
                     <li>Private Liquid-Cooled GPU Racks</li>
                     <li>100% Custom Fine-Tuned Models</li>
@@ -318,5 +329,42 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+        function updateTimer() {
+            const now = new Date();
+            // Set deadline to 18:00:00 today local time
+            const deadline = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0, 0);
+            
+            if (now >= deadline) {
+                document.getElementById('diamond-price').innerHTML = '$15,000<span>/yr</span>';
+                document.getElementById('diamond-original').style.display = 'none';
+                
+                // Update modal data attribute to reflect new price
+                const diamondBtn = document.querySelector('.card.diamond .open-modal');
+                if (diamondBtn) diamondBtn.setAttribute('data-price', '15000');
+
+                const promo = document.getElementById('promo-countdown');
+                if(promo) {
+                    promo.innerHTML = 'Standard Pricing Applied';
+                    promo.style.color = 'var(--text-secondary)';
+                }
+                return;
+            }
+
+            const diff = deadline - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const pad = (n) => n < 10 ? '0' + n : n;
+            const timerEl = document.getElementById('timer');
+            if (timerEl) {
+                timerEl.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+            }
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
 </body>
 </html>
